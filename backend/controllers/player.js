@@ -1,4 +1,5 @@
 const Player = require("../models/player");
+const { Op } = require("sequelize");
 
 exports.postAddPlayer = async (req, res, next) => {
   try {
@@ -46,5 +47,37 @@ exports.postAddPlayer = async (req, res, next) => {
       error: error.message,
     });
     next(error);
+  }
+};
+
+exports.getPlayer = async (req, res, next) => {
+  const name = req.query.name;
+  if (!name) {
+    return res
+      .status(400)
+      .json({ message: "Name query parameter is required" });
+  }
+
+  try {
+    const players = await Player.findAll({
+      where: {
+        name: {
+          [Op.like]: `${name}`,
+        },
+      },
+    });
+
+    if (players.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No players found with the given name" });
+    }
+
+    res.status(200).json(players);
+  } catch (error) {
+    console.error("Error retrieving player:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while retrieving the player" });
   }
 };

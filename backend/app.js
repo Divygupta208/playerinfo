@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use("/api", playerRoute);
 
 sequelize
-  .sync({ alter: true })
+  .sync()
   .then((result) => {
     console.log("Database synchronized successfully");
     app.listen(3000, () => {

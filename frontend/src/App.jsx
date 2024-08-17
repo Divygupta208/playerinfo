@@ -3,8 +3,6 @@ import Addplayer from "./components/addplayer";
 import Searchplayer from "./components/searchplayer";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
       <Addplayer />
