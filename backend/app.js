@@ -7,11 +7,12 @@ const playerRoute = require("./routes/player");
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(bodyParser.json());
 
-app.use("/", (req, res, next) => {
-  res.json({ message: "welcome" });
-});
+// app.use("/", (req, res, next) => {
+//   res.json({ message: "welcome" });
+// });
 
 app.use("/api", playerRoute);
 

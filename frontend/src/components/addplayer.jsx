@@ -13,7 +13,7 @@ const Addplayer = () => {
   const wicketsRef = useRef();
   const averageRef = useRef();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
       name: nameRef.current.value,
@@ -29,6 +29,24 @@ const Addplayer = () => {
       average: averageRef.current.value,
     };
     console.log("Form Data Submitted:", formData);
+
+    try {
+      const response = await fetch("http://localhost:3000/api/addplayer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        console.error("Error adding player:", response.statusText);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
