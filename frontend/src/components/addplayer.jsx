@@ -29,7 +29,6 @@ const Addplayer = () => {
       average: averageRef.current.value,
     };
     console.log("Form Data Submitted:", formData);
-    // You can perform further actions here like sending the data to a backend
   };
 
   return (
