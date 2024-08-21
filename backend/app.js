@@ -21,11 +21,8 @@ app.use("/api", playerRoute);
 sequelize
   .sync()
   .then((result) => {
-    console.log("Database synchronized successfully");
     app.listen(3000, () => {
       console.log("Server is running on port 3000");
     });
   })
-  .catch((err) => {
-    console.error("Error synchronizing the database:", err);
-  });
+  .catch((err) => {});
